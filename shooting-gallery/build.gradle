@@ -1,0 +1,10 @@
+type = 'swf'
+srcDirs = ['src/main/flash']
+frameworkLinkage = 'rsl'
+mainClass = 'Main.as'
+//playerVersion = '14.0'
+
+dependencies {
+//    external group: 'com.adobe.flexunit', name: 'flexunit', version: flexunit_version, ext: 'swc'
+    merged fileTree(dir: 'libs/', include: '*.swc')
+}
