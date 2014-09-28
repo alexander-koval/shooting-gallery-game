@@ -2,6 +2,8 @@
  * Created by alexander on 9/25/14.
  */
 package {
+import events.SlingshotEvent;
+
 import flash.geom.Point;
 
 import starling.display.Image;
@@ -13,6 +15,7 @@ import starling.utils.HAlign;
 import starling.utils.VAlign;
 
 public class Slingshot extends Sprite {
+    private static var Speed:int;
     private static const CONTROL_POINT_1:Point = new Point(30, 47);
     private static const CONTROL_POINT_2:Point = new Point(170, 60);
     private static const FRICTION:Number = 0.5;
@@ -28,6 +31,7 @@ public class Slingshot extends Sprite {
     private var _projectile:Projectile;
 
     public function Slingshot() {
+        Speed = Main.config[Main.SPEED];
         var slingshot:Image = Resources.getSlingshot();
         var mask:Image = Resources.getMask();
         rope1 = Resources.getRope();
@@ -137,8 +141,8 @@ public class Slingshot extends Sprite {
                 distanceY = holder.y - CONTROL_POINT_3.y;
                 var deltaX:Number = distanceX / (CONTROL_POINT_3.x + 100);
                 var deltaY:Number = distanceY  / (CONTROL_POINT_3.y + 100);
-                _projectile.velocity.x = (-Main.BALL_SPEED * deltaX);
-                _projectile.velocity.y = (-Main.BALL_SPEED * deltaY);
+                _projectile.velocity.x = (-Speed * deltaX);
+                _projectile.velocity.y = (-Speed * deltaY);
                 dispatchEvent(new SlingshotEvent(SlingshotEvent.SHOOT, _projectile));
             }
             arrow.visible = false;

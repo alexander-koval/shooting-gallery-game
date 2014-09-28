@@ -1,4 +1,7 @@
 package {
+import events.GameEvent;
+import events.SlingshotEvent;
+
 import flash.events.TimerEvent;
 import flash.utils.Timer;
 
@@ -10,6 +13,7 @@ import starlingBox.game.pooling.LinkedList;
 import starlingBox.game.pooling.LinkedListNode;
 
 public class Game extends Sprite {
+    private static var MonsterNum:int;
     private static const Min:Number = 0.8;
     private static const Max:Number = 1.0;
     private var timer:Timer;
@@ -18,15 +22,19 @@ public class Game extends Sprite {
     private var physics:LinkedList;
     private var slingshot:Slingshot;
     private var background:Image;
+    private var killed:int;
 
     public function Game() {
         timer = new Timer(500);
         pool1 = new SpritePool();
         pool1.initialize(Projectile, 4, 0);
         pool2 = new SpritePool();
-        pool2.initialize(Monster, Main.MONSTER_COUNTS, 0);
-        physics = new LinkedList(Main.MONSTER_COUNTS + 4);
+        MonsterNum = Main.config[Main.MONSTERS];
+        pool2.initialize(Monster, MonsterNum, 0);
+        physics = new LinkedList(MonsterNum + 4);
         slingshot = new Slingshot();
+        slingshot.x = (Main.STAGE_WIDTH - slingshot.width) / 2;
+        slingshot.y = Main.STAGE_HEIGHT - slingshot.height / 2;
         background = Resources.getBackground();
         this.addEventListener(Event.ADDED_TO_STAGE, initialize);
         this.addEventListener(Event.REMOVED_FROM_STAGE, destroy);
@@ -35,8 +43,6 @@ public class Game extends Sprite {
     public function initialize(event:Event):void {
         timer.addEventListener(TimerEvent.TIMER, onMonsterAdd);
         slingshot.addEventListener(SlingshotEvent.SHOOT, onShoot);
-        slingshot.x = (stage.stageWidth - slingshot.width) / 2;
-        slingshot.y = stage.stageHeight - slingshot.height / 2;
         background.scaleX = background.scaleY = 1.0;
         background.scaleX = background.scaleY = stage.stageWidth / background.width;
         addChildAt(background, 0);
@@ -46,6 +52,7 @@ public class Game extends Sprite {
     }
 
     private function destroy(event:Event):void {
+        killed = 0;
         timer.removeEventListener(TimerEvent.TIMER, onMonsterAdd);
         timer.removeEventListener(TimerEvent.TIMER, onSlingshotCharge);
         slingshot.removeEventListeners(SlingshotEvent.SHOOT);
@@ -82,11 +89,15 @@ public class Game extends Sprite {
         monster.initialize(
                 function(monster:Monster):void {
                     if (!monster.isAlive) {
+                        killed += 1;
                         pool2.setSprite(monster);
+                        if (killed >= MonsterNum) {
+                            dispatchEvent(new GameEvent(GameEvent.GAME_COMPLETE));
+                        }
                     }
                 });
         physics.append(monster);
-        if (timer.currentCount == Main.MONSTER_COUNTS) {
+        if (timer.currentCount == MonsterNum) {
             timer.removeEventListener(TimerEvent.TIMER, onMonsterAdd);
         }
         addChildAt(monster, 1);

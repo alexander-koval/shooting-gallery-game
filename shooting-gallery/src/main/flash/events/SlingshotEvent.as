@@ -1,7 +1,7 @@
 /**
  * Created by alexander on 9/27/14.
  */
-package {
+package events {
 import starling.events.Event;
 
 public class SlingshotEvent extends Event {

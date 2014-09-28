@@ -19,10 +19,6 @@ public class Monster extends Sprite implements IPhysicalEntity {
     private var onEnemy:Function;
     private var _isAlive:Boolean;
     private var _isDieing:Boolean;
-    private var _wanderAngle:Number = 0;
-    private var _wanderDistance:Number = 10;
-    private var _wanderRadius:Number = 5;
-    private var _wanderRange:Number = 1;
 
     public function Monster() {
         movie = Resources.getMonster();

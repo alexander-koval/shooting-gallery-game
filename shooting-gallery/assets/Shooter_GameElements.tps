@@ -190,6 +190,10 @@
             <filename>../../../../../../../virtualfs/Workspace/out/bianfu1/bianfu1_25.png</filename>
             <filename>../../../../../../../virtualfs/Workspace/background.png</filename>
             <filename>../../../../../../../virtualfs/Workspace/out/play.png</filename>
+            <filename>../../../../../../../virtualfs/Workspace/out/button_menu.png</filename>
+            <filename>../../../../../../../virtualfs/Workspace/out/mori_bg.png</filename>
+            <filename>../../../../../../../virtualfs/Workspace/out/completed.png</filename>
+            <filename>../../../../../../../virtualfs/Workspace/out/failed.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

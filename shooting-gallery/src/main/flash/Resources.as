@@ -75,5 +75,23 @@ public class Resources {
         var image:Image = new Image(texture);
         return image;
     }
+
+    static public function getMoriBG():Image {
+        var texture:Texture = atlas.getTexture("mori_bg");
+        var image:Image = new Image(texture);
+        return image;
+    }
+
+    static public function getFailed():Image {
+        var texture:Texture = atlas.getTexture("failed");
+        var image:Image = new Image(texture);
+        return image;
+    }
+
+    static public function getCompleted():Image {
+        var texture:Texture = atlas.getTexture("completed");
+        var image:Image = new Image(texture);
+        return image;
+    }
 }
 }
