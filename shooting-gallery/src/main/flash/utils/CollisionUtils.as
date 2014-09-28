@@ -1,7 +1,9 @@
 /**
  * Created by alexander on 9/25/14.
  */
-package {
+package utils {
+import entities.IPhysicalEntity;
+
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
@@ -87,8 +89,8 @@ public class CollisionUtils {
             var vel1F:Point = rotate(vel1.x, vel1.y, sin, cos, false);
             entity0.velocity.x = vel0F.x;
             entity0.velocity.y = vel0F.y;
-            entity1.velocity.x = vel1F.x * 0.5;
-            entity1.velocity.y = vel1F.y * 0.5;
+            entity1.velocity.x = vel1F.x ;
+            entity1.velocity.y = vel1F.y ;
             return true;
         }
         return false;

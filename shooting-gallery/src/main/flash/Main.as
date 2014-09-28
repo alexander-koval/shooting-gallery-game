@@ -26,9 +26,9 @@ public class Main extends Sprite {
     public static const GRAVITY:Number = 0.5;
     public static var FRAME_RATE:int;
 
-    private static var MONSTER_COUNTS:int = 20;
+    private static var MONSTER_COUNTS:int = 10;
     private static var BALL_SPEED:int = 50;
-    private static var GAME_TIME:int = 50;
+    private static var GAME_TIME:int = 30;
 
     public function Main() {
         if (this.stage) this.init();
@@ -40,12 +40,12 @@ public class Main extends Sprite {
         stage.scaleMode = StageScaleMode.NO_SCALE;
         this.removeEventListener(Event.ADDED_TO_STAGE, init);
         FRAME_RATE = stage.frameRate;
+        //TODO: akoval Fix for Flash Player on Linux
         setTimeout(function():void {
             var starling:Starling = new Starling(GameMain, stage, new Rectangle(0, 0, 768, 1024));
             starling.start();
             starling.stage.stageWidth = 768;
             starling.stage.stageHeight = 1024;
-            starling.showStats = true;
         }, 0.5);
         var loader:URLLoader = new URLLoader();
         loader.dataFormat = URLLoaderDataFormat.TEXT;

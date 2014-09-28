@@ -2,6 +2,8 @@
  * Created by alexander on 9/25/14.
  */
 package {
+import entities.Projectile;
+
 import events.SlingshotEvent;
 
 import flash.geom.Point;

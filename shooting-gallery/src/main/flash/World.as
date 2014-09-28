@@ -4,10 +4,12 @@
 package {
 import flash.utils.Dictionary;
 
+import screens.GameScreen;
+
 import starling.display.Sprite;
 import starling.events.Event;
 
-import states.GameScreen;
+import screens.GameScreen;
 
 public class World extends Sprite implements IWorld {
     protected var _current:String;
@@ -56,7 +58,7 @@ public class World extends Sprite implements IWorld {
             trace("screen " + name + " cannot be used while in the " + _current + " state.");
             return;
         }
-        screens[_current].enter();
+        GameScreen(screens[_current]).enter();
     }
 
     public function addScreen(name:String, screen:GameScreen, fromScreens:Vector.<String>):void {

@@ -1,7 +1,7 @@
 /**
  * Created by alexander on 9/28/14.
  */
-package states {
+package screens {
 import starling.display.Sprite;
 
 public class GameScreen extends Sprite implements IState {

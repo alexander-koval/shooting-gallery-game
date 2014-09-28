@@ -2,7 +2,7 @@
  * Created by alexander on 9/28/14.
  */
 package {
-import states.GameScreen;
+import screens.GameScreen;
 
 public interface IWorld {
     /**

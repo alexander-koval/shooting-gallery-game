@@ -6,10 +6,10 @@ import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 import starling.events.Event;
 
-import states.GameScreen;
+import screens.GameScreen;
 
-import states.MenuScreen;
-import states.PlayScreen;
+import screens.MenuScreen;
+import screens.PlayScreen;
 
 public class GameMain extends Sprite {
     private var world:World;

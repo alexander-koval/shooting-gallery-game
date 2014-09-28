@@ -1,13 +1,15 @@
 /**
  * Created by alexander on 9/27/14.
  */
-package {
+package entities {
 import flash.geom.Point;
 import flash.geom.Rectangle;
 
 import starling.core.Starling;
 import starling.display.MovieClip;
 import starling.display.Sprite;
+
+import utils.CollisionUtils;
 
 public class Projectile extends Sprite implements IPhysicalEntity {
     private var _bounce:int = -1;

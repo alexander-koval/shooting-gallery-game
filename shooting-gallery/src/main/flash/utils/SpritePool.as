@@ -1,7 +1,7 @@
 /**
  * Created by alexander on 9/27/14.
  */
-package {
+package utils {
 import starling.display.Sprite;
 
 public final class SpritePool {

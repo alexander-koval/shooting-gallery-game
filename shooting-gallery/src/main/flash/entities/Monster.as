@@ -1,10 +1,12 @@
-package {
+package entities {
 
 import flash.geom.Rectangle;
 import starling.core.Starling;
 import starling.display.MovieClip;
 import starling.display.Sprite;
 import flash.geom.Point;
+
+import utils.CollisionUtils;
 
 public class Monster extends Sprite implements IPhysicalEntity {
     private var _bounce:int = -1;
@@ -19,6 +21,12 @@ public class Monster extends Sprite implements IPhysicalEntity {
     private var onEnemy:Function;
     private var _isAlive:Boolean;
     private var _isDieing:Boolean;
+    private var _wanderAngle:Number = 0;
+    private var _steeringForce:Point;
+    private var maxSpeed:Number = 3;
+    private var _wanderDistance:Number = 1;
+    private var _wanderRadius:Number = .5;
+    private var _wanderRange:Number = 1;
 
     public function Monster() {
         movie = Resources.getMonster();
@@ -32,7 +40,9 @@ public class Monster extends Sprite implements IPhysicalEntity {
         _isAlive = true;
         _isDieing = false;
         _acceleration = new Point();
-        _velocity = new Point((Math.random() * 3) + 2, (Math.random() * 3) + 2);
+//        _velocity = new Point((Math.random() * 3) + 2, (Math.random() * 3) + 2);
+        _velocity = new Point();
+        _steeringForce = new Point();
         this.onWall = onWall;
         this.onEnemy = onEnemy;
     }
@@ -49,8 +59,17 @@ public class Monster extends Sprite implements IPhysicalEntity {
 
     public function update():void {
         _radius = (this.width * 0.2);
-        _velocity.x += _acceleration.x;
-        _velocity.y += _acceleration.y;
+        if (!_isDieing) {
+            wander();
+            _velocity = _velocity.add(_steeringForce);
+            _steeringForce = new Point();
+            _velocity.x += _acceleration.x;
+            _velocity.y += _acceleration.y;
+            _velocity.normalize(maxSpeed);
+        } else {
+            _velocity.x += _acceleration.x;
+            _velocity.y += _acceleration.y;
+        }
         x += _velocity.x;
         y += _velocity.y;
     }
@@ -141,6 +160,20 @@ public class Monster extends Sprite implements IPhysicalEntity {
         }
     }
 
-
+    public function wander():void {
+        var velClone:Point = _velocity.clone();
+        velClone.x /= velClone.length || 1;
+        velClone.y /= velClone.length || 1;
+        var center:Point = new Point(velClone.x * _wanderDistance, velClone.y * _wanderDistance);
+        var offset:Point = new Point(0, 1);
+        offset.x *= _wanderRadius;
+        offset.y *= _wanderRadius;
+        var len :Number = offset.length;
+        offset.x = Math.cos(_wanderAngle) * len;
+        offset.y = Math.sin(_wanderAngle) * len;
+        _wanderAngle += Math.random() * _wanderRange - _wanderRange * .5;
+        var force:Point = center.add(offset);
+        _steeringForce = _steeringForce.add(force);
+    }
 }
 }

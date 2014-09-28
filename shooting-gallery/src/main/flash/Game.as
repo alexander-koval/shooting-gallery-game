@@ -1,4 +1,8 @@
 package {
+import entities.IPhysicalEntity;
+import entities.Monster;
+import entities.Projectile;
+
 import events.GameEvent;
 import events.SlingshotEvent;
 
@@ -9,8 +13,12 @@ import starling.display.Image;
 import starling.events.Event;
 import starling.display.Sprite;
 
-import starlingBox.game.pooling.LinkedList;
-import starlingBox.game.pooling.LinkedListNode;
+import utils.LinkedList;
+import utils.LinkedListNode;
+
+import utils.SpritePool;
+
+import utils.Utils;
 
 public class Game extends Sprite {
     private static var MonsterNum:int;
@@ -27,11 +35,11 @@ public class Game extends Sprite {
     public function Game() {
         timer = new Timer(500);
         pool1 = new SpritePool();
-        pool1.initialize(Projectile, 4, 0);
+        pool1.initialize(Projectile, 5, 0);
         pool2 = new SpritePool();
         MonsterNum = Main.config[Main.MONSTERS];
         pool2.initialize(Monster, MonsterNum, 0);
-        physics = new LinkedList(MonsterNum + 4);
+        physics = new LinkedList(MonsterNum + 5);
         slingshot = new Slingshot();
         slingshot.x = (Main.STAGE_WIDTH - slingshot.width) / 2;
         slingshot.y = Main.STAGE_HEIGHT - slingshot.height / 2;

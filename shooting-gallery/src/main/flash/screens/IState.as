@@ -1,7 +1,7 @@
 /**
  * @author: alexander
  */
-package states {
+package screens {
 public interface IState {
     /**
      * Обработчик входа в состояние

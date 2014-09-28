@@ -1,7 +1,7 @@
 /**
  * Created by alexander on 9/27/14.
  */
-package {
+package entities {
 import flash.geom.Point;
 
 public interface IPhysicalEntity {

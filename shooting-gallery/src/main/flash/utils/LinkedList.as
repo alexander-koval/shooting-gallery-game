@@ -1,6 +1,6 @@
-﻿package starlingBox.game.pooling
+﻿package utils
 {
-	
+
 	/*
 	 * alkemiTools is a class Package by Alkemi (Mickael Mouillé & Alain Puget)
 	 * Find out more about us at www.alkemi-games.com
