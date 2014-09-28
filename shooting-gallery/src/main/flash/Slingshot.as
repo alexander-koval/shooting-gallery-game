@@ -25,7 +25,7 @@ public class Slingshot extends Sprite {
     private var rope1:Image;
     private var rope2:Image;
     private var arrow:Image;
-    private var holder:Image;
+    private var holder:Holder;
     private var spring:Number = 0.0;
     private var velocity:Point = new Point();
     private var _projectile:Projectile;
@@ -41,7 +41,7 @@ public class Slingshot extends Sprite {
         arrow = Resources.getArrow();
         arrow.alignPivot(HAlign.CENTER, VAlign.BOTTOM);
         ROPE_SIZE = new Point(rope1.width, rope1.height);
-        holder = Resources.getPangci();
+        holder = new Holder(Resources.getPangciTexture());
         holder.alignPivot();
         mask.x = (slingshot.width - mask.width) / 2;
         mask.y = -15;
@@ -159,4 +159,29 @@ public class Slingshot extends Sprite {
         _projectile = value;
     }
 }
+}
+
+import flash.geom.Point;
+import flash.geom.Rectangle;
+
+import starling.display.DisplayObject;
+import starling.display.Image;
+import starling.textures.Texture;
+
+class Holder extends Image {
+
+    function Holder(texture:Texture) {
+        super(texture);
+    }
+
+    override public function hitTest(localPoint:Point, forTouch:Boolean = false):DisplayObject {
+        if (forTouch && (!visible || !touchable)) return null;
+
+        var theBounds:Rectangle = getBounds(this);
+        theBounds.offset(0, -texture.height);
+        theBounds.inflate(texture.width, texture.height * 2);
+
+        if (theBounds.containsPoint(localPoint)) return this;
+        return null;
+    }
 }

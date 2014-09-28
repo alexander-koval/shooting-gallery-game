@@ -115,6 +115,7 @@ public class Game extends Sprite {
         timer.removeEventListener(TimerEvent.TIMER, onSlingshotCharge);
         if (!slingshot.projectile) {
             var projectile:Projectile = Projectile(pool1.getSprite());
+            projectile.touchable = false;
             projectile.initialize(
                     function(projectile:Projectile):void {
                         pool1.setSprite(projectile);

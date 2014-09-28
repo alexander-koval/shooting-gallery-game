@@ -48,6 +48,11 @@ public class Resources {
         return image;
     }
 
+    static public function getPangciTexture():Texture {
+        var texture:Texture = atlas.getTexture("default_pangci");
+        return texture;
+    }
+
     static public function getMonster():MovieClip {
         var movie:MovieClip = new MovieClip(atlas.getTextures("bianfu1_"), 26);
         return movie;
