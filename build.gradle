@@ -10,6 +10,7 @@ buildscript {
 subprojects {
     apply plugin: 'gradlefx'
     flexHome = '/opt/apache-flex-sdk'
+
 //    repositories {
 //	ivy {
 //            name 'Apache'
@@ -37,7 +38,9 @@ subprojects {
 
     additionalCompilerOptions = [
             '-target-player=11.1',
-            '-static-link-runtime-shared-libraries=true'
+            '-static-link-runtime-shared-libraries=true',
+            '-use-network=false',
+            '-debug=false'
     ]
     
 //    sdkAutoInstall {
