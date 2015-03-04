@@ -9,32 +9,18 @@ buildscript {
 }
 subprojects {
     apply plugin: 'gradlefx'
-    flexHome = '/opt/apache-flex-sdk'
 
-//    repositories {
-//	ivy {
-//            name 'Apache'
-//            // pattern for url http://archive.apache.org/dist/flex/4.9.0/binaries/apache-flex-sdk-4.9.0-bin.zip
-//            artifactPattern 'http://archive.apache.org/dist/flex/[revision]/binaries/[module]-[revision]-bin.[ext]'
-//        }
-//        ivy {
-//    	    name 'Adobe AIR'
-//    	    artifactPattern 'http://download.macromedia.com/air/win/download/[revision]/[module].[ext]'
-//        }
-//	maven {
-//	    name 'flex-mojos-repository',
-//	    url 'http://repository.sonatype.org/content/groups/flexgroup'
-//	}
-//        mavenCentral()
-//        mavenLocal()
-//        mavenRepo name: 'flex-mojos-repository', url: "http://repository.sonatype.org/content/groups/flexgroup"
-//    }
+   repositories {
+        ivy {
+           artifactPattern 'http://archive.apache.org/dist/flex/[revision]/binaries/[module]-[revision]-bin.[ext]'
+       }
+       mavenCentral()
+       mavenLocal()
+   }
 
-//    dependencies {
-//	flexSDK group: 'org.apache', name: 'apache-flex-sdk', version: '4.13.0', ext: 'zip'
-//        airSDK  group: 'com.adobe', name: 'AdobeAIRSDK', version: '3.4', ext: 'zip'
-//        external group: 'com.adobe.flexunit', name: 'flexunit', version: flexunit_version, ext:'swc'
-//    }
+   dependencies {
+       flexSDK group: 'com.adobe.flex.framework', name: 'apache-flex-sdk', version: '4.9.0', ext: 'zip'
+   }
 
     additionalCompilerOptions = [
             '-target-player=11.1',
@@ -42,9 +28,5 @@ subprojects {
             '-use-network=false',
             '-debug=false'
     ]
-    
-//    sdkAutoInstall {
-//        showPrompts = false
-//}
 }
 
